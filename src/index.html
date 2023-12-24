@@ -5,39 +5,62 @@
     <title>Open Space</title>
     <link rel="stylesheet" href="properties.css">
     <script>
-        function checkPassword() {
-            var passwordInput = document.getElementById("passwordInput");
-            var okButton = document.querySelector('.inpuute input[type="button"]');
-            var password = "TrustNo1";
-
-            if (passwordInput.value === password) {
-                enableInputs();
-                disableLoginElements();
-            } else {
-                alert("Incorrect password. Access denied!");
-            }
-        }
-        function enableInputs() {
-            var checkboxes = document.querySelectorAll('.check-buttons input');
-            var levers = document.querySelectorAll('.levers input');
-            var launchButton = document.querySelector('.launch-button');
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkboxes = document.querySelectorAll('.check-buttons input[type="checkbox"]');
+            var levers = document.querySelectorAll('.levers input[type="range"]');
 
             checkboxes.forEach(function (checkbox) {
-                checkbox.disabled = false;
+                checkbox.onchange = checkControlsStateChanged;
             });
 
             levers.forEach(function (lever) {
-                lever.disabled = false;
+                lever.onchange = checkControlsStateChanged;
             });
 
-            launchButton.disabled = false;
+            // Add event listener for the launch button
+            var launchButton = document.querySelector('.launch-button');
+            launchButton.addEventListener('click', launchRocket);
+        });
+
+        function checkControlsStateChanged() {
+            var checkboxes = document.querySelectorAll('.check-buttons input[type="checkbox"]');
+            var levers = document.querySelectorAll('.levers input[type="range"]');
+            var launchButton = document.querySelector('.launch-button');
+
+            // Check if all checkboxes are checked and all levers are set to maximum
+            var allChecked = Array.from(checkboxes).every(function (checkbox) {
+                return checkbox.checked;
+            });
+
+            var allMaxed = Array.from(levers).every(function (lever) {
+                return parseInt(lever.value) === parseInt(lever.max);
+            });
+
+            // Enable the launch button if all systems are ready, otherwise disable it
+            launchButton.disabled = !(allChecked && allMaxed);
+
+            // Call the function for any change of controls state
+            controlsStateChanged();
         }
-        function disableLoginElements() {
-            var passwordInput = document.getElementById("passwordInput");
-            var okButton = document.querySelector('input[type="button"][value="ok"]');
-            passwordInput.disabled = true;
-            okButton.disabled = true;
+
+        function controlsStateChanged() {
+            // You can add additional logic here to respond to any change in controls state
+            // For now, let's just log a message to the console
+            console.log("Controls state changed!");
         }
+
+        function launchRocket() {
+            // Animate the rocket
+            var rocket = document.querySelector('.rocket');
+            rocket.style.transition = 'transform 3s ease-in-out';
+            rocket.style.transform = 'translateY(-100%) rotate(45deg)';
+
+            // Additional countdown
+            setTimeout(function () {
+                alert("3... 2... 1... Liftoff!");
+            }, 1000);
+        }
+
     </script>
 </head>
 <body>
