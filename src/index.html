@@ -4,6 +4,41 @@
     <meta charset="UTF-8">
     <title>Open Space</title>
     <link rel="stylesheet" href="properties.css">
+    <script>
+        function checkPassword() {
+            var passwordInput = document.getElementById("passwordInput");
+            var okButton = document.querySelector('.inpuute input[type="button"]');
+            var password = "TrustNo1";
+
+            if (passwordInput.value === password) {
+                enableInputs();
+                disableLoginElements();
+            } else {
+                alert("Incorrect password. Access denied!");
+            }
+        }
+        function enableInputs() {
+            var checkboxes = document.querySelectorAll('.check-buttons input');
+            var levers = document.querySelectorAll('.levers input');
+            var launchButton = document.querySelector('.launch-button');
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.disabled = false;
+            });
+
+            levers.forEach(function (lever) {
+                lever.disabled = false;
+            });
+
+            launchButton.disabled = false;
+        }
+        function disableLoginElements() {
+            var passwordInput = document.getElementById("passwordInput");
+            var okButton = document.querySelector('input[type="button"][value="ok"]');
+            passwordInput.disabled = true;
+            okButton.disabled = true;
+        }
+    </script>
 </head>
 <body>
 <div class="space">
@@ -12,25 +47,26 @@
         <img class="rocket" alt="" src="https://stepik.org/media/attachments/lesson/452681/rocket.png"/>
     </div>
     <div class="control-panel">
-        <div class = "control-panel__inner">
-            <input type="password">
-            <input type="button" value="ok">
+        <div class="control-panel__inner">
+            <input type="password" placeholder="Enter Password" id="passwordInput">
+            <input type="button" value="ok" onclick="checkPassword()">
+
             <div class="check-buttons">
-                <input type="checkbox">
-                <input type="checkbox">
-                <input type="checkbox">
-                <input type="checkbox">
-                <input type="checkbox">
-                <input type="checkbox">
+                <input type="checkbox" disabled>
+                <input type="checkbox" disabled>
+                <input type="checkbox" disabled>
+                <input type="checkbox" disabled>
+                <input type="checkbox" disabled>
+                <input type="checkbox" disabled>
             </div>
             <div class="levers">
-                <input type="range">
-                <input type="range">
-                <input type="range">
-                <input type="range">
-                <input type="range">
+                <input type="range" disabled>
+                <input type="range" disabled>
+                <input type="range" disabled>
+                <input type="range" disabled>
+                <input type="range" disabled>
             </div>
-            <input type="button" value="launch">
+            <input type="button" value="launch" class="launch-button" disabled>
         </div>
     </div>
 </div>
