@@ -42,7 +42,27 @@
     flex-direction: column;
     align-items: center;
 }
+.control-panel {
+    background: linear-gradient(to right, #4CAF50, #2196F3); /* Gradient background */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+}
+input[type="password"] {
+    border: 2px solid #4CAF50; /* Change border color */
+    border-radius: 5px; /* Rounded corners */
+    color: #4CAF50; /* Change text color */
+}
 
+input[type="button"][value="ok"], input[type="button"][value="launch"] {
+    background-color: #4CAF50; /* Change button background color */
+    color: white; /* Change text color */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+input[type="button"]{
+    border-radius: 5px; /* Add your desired border-radius value */
+}
 .levers {
     display: flex;
     flex-direction: column;
@@ -51,17 +71,12 @@
     transform: rotate(270deg);
     margin-top: 20px;
 }
-
-.inpuute {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-input {
-    margin: 5px;
-}
 .check-buttons {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
+}
+input {
+    margin: 5px;
 }
